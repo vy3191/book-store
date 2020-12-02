@@ -1,0 +1,1 @@
+ReactDOM.render(<h1>Book Store App</h1>, document.getElementById('root'));

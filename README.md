@@ -1,3 +1,11 @@
+Dependencies and dev-dependencies list:-
+
+react react-dom react-router-dom react-redux redux-saga history redux redux-saga connected-react-router
+__________________________________________________________________________________________________________
+webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react 
+__________________________________________________________________________________________________________
+css-loader style-loader sass-loader node-sass
+
 If we are planning to implement spa with routing, we need history library to keep browser routing history of our application.
 We use three types of history in spa.
 1. Browser history
