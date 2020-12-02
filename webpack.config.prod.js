@@ -2,6 +2,7 @@ const path = require('path');
 const { ProvidePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const webpackConfig = {
   entry: {
@@ -21,7 +22,21 @@ const webpackConfig = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'public'),
+    chunkFilename: '[name].bundle.js'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+        cacheGroups: {
+            vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                enforce: true,
+                chunks: 'all'
+            }
+        }
+    }
   },
   module: {
     rules: [
