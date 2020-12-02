@@ -1,9 +1,11 @@
 const path = require('path');
+const { ProvidePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
   entry: {
     app:  path.resolve(__dirname, 'src'),
-    dev: ['webpack-dev-server/client?http://0.0.0.0:8080', 'webpack/hot/only-dev-server'],
     polyfill: ['babel-polyfill', 'classlist-polyfill'],
     vendor: [
       'react', 
@@ -22,10 +24,46 @@ const webpackConfig = {
     path: path.resolve(__dirname, 'public')
   },
   module: {
-    {
-      test:/ /,
-    }
-  }
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'  
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, {loader:'css-loader', options: {url: false}}] 
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, {loader:'css-loader', options: {url: false}}, 'sass-loader'] 
+      }
+    ]
+  },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src/components')
+    },
+    extensions: ['js', 'jsx', 'css', 'scss']
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index-template.html')
+    }),
+    new ProvidePlugin({
+      React: 'react',
+      ReactDOM: 'react-dom',
+      PropTypes: 'prop-types'
+    }),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      failOnError: true
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
+  ],
+  mode: 'production'
 };
 
 module.exports = webpackConfig;

@@ -24,7 +24,6 @@ const webpackConfig = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'style-loader'
@@ -37,7 +36,6 @@ const webpackConfig = {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'style-loader'
