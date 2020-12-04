@@ -7,9 +7,9 @@ const webpackConfig = {
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:8080', 
     'webpack/hot/only-dev-server',
-    'babel-polyfill', 
+    '@babel/polyfill', 
     'classlist-polyfill',
-    path.resolve(__dirname, 'src')
+    path.resolve(__dirname, 'src/index.js')
   ],
   output: {
     filename: 'bundle.js',

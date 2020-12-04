@@ -5,21 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const webpackConfig = {
-  entry: {
-    app:  path.resolve(__dirname, 'src'),
-    polyfill: ['babel-polyfill', 'classlist-polyfill'],
-    vendor: [
-      'react', 
-      'history', 
-      'react-dom', 
-      'redux-saga',
-      'react-router-dom', 
-      'prop-types', 'redux', 
-      'react-redux', 'immutable', 
-      'connected-react-router', 
-      'redux-immutable'
-    ]
-  },
+  entry: [
+    '@babel/polyfill', 
+    'classlist-polyfill',
+    path.resolve(__dirname, 'src/index.js')
+  ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
@@ -28,15 +18,19 @@ const webpackConfig = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-        cacheGroups: {
-            vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: 'vendors',
-                enforce: true,
-                chunks: 'all'
-            }
-        }
-    }
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `npm.${packageName.replace('@', '')}`;
+          },
+        },
+      },
+    },
   },
   module: {
     rules: [
