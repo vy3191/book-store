@@ -78,10 +78,8 @@ const webpackConfig = {
     contentBase: path.resolve(__dirname, 'public'),
     hot: true,
     host: '0.0.0.0'
+    // historyApiFallback: true  >>>> this is required only for BrowserHistory based application not for HashHistory applications.
   }
 };
 
 module.exports = webpackConfig;
-
-
-
