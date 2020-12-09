@@ -4,8 +4,9 @@ import { Header, Footer } from 'components';
 
 const BaseApp = () => {
   return (   
-    <div>
-      <Header />
+    <>
+      <section className="client-content">
+        <Header />
         <Switch>
           <Route exact path="/">
             <Redirect to="/home" />
@@ -14,8 +15,9 @@ const BaseApp = () => {
           <Route path="/book-store" render={ () => <h1>Book store goes here</h1> } />
           <Route path="/contact" render={ () => <h1>Contact goes here</h1> } />
         </Switch> 
+      </section>
       <Footer />
-    </div>  
+    </>  
   )
 }
 

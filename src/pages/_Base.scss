@@ -1,0 +1,24 @@
+.html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.client-content {
+  // flex: 1 0 auto;
+  //  flex-grow >>>> footer height is 100px --> flex grow uses the remaining height for .client-content
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+footer {
+  flex-shrink: 0;
+}
