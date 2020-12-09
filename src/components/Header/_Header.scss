@@ -1,0 +1,15 @@
+.components-header {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   min-height: 56px;
+   background-color: coral;
+   color: white;
+   nav {
+     margin-right: 20px;
+     a+a {
+       margin-left: 20px;
+     }
+   }
+}

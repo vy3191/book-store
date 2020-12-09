@@ -3,6 +3,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { hot as hotReloader } from 'react-hot-loader/root';
 import configureStore, { history } from './redux/store/configureStore';
 import BaseApp from './pages/BaseApp';
+import './scss/main.scss';
 
 const store = configureStore({});
 
