@@ -1,12 +1,22 @@
-import React from 'react'
 
-function Card() {
+
+const Card = ({imgAlt, imgSrc, title}) => {
   return (
     <article className="components-card">
-      <img src="http://books.google.com/books/content?id=gW36ngEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="title" />
-      <p>Title goes here</p>
+      <img src={imgSrc} alt={imgAlt} />
+      <p>{title}</p>
     </article>
   )
+}
+
+Card.defaultProps ={
+  imgAlt: ""
+}
+
+Card.propTypes = {
+  imgAlt: PropTypes.string,
+  imgSrc: PropTypes.string,
+  title: PropTypes.string
 }
 
 export default Card

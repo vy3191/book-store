@@ -1,17 +1,13 @@
-import { Card } from 'components';
+import { Card } from 'components'
 
-const BookStoreContainer = () => {
+const BookStoreContainer = ({ data }) => {
   return (
     <div className="book-store">
-      <Card />
-      <Card />
-      <Card />     
-      <Card />     
-      <Card />     
-      <Card />     
-      <Card />     
+      {data.map((book) => (
+        <Card key={book.id} {...book} />
+      ))}
     </div>
   )
 }
 
-export default BookStoreContainer;
+export default BookStoreContainer
