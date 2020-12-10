@@ -20,10 +20,14 @@ const BookStoreHandler = () => {
       imgSrc: item.volumeInfo.imageLinks.thumbnail,
       imgAlt: item.volumeInfo.authors.join(', '),
       title: item.volumeInfo.title,
-      id: item.id
+      id: item.id,
     }))
 
-  return <BookStoreContainer error={error} data={data} />
+  return (
+    <>
+      <BookStoreContainer error={error} data={data} />
+    </>
+  )
 }
 
 BookStoreHandler.propTypes = {
