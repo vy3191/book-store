@@ -1,11 +1,18 @@
 import { Card } from 'components'
 
-const BookStoreContainer = ({ data }) => {
+const BookStoreContainer = ({ data, onSearch }) => {
   return (
     <div className="book-store">
-       <div className="search-container">
-        <form>
-          <input type="text" placeholder="Search.." autoComplete="off" name="search" />
+      <div className="search-container">
+        <form
+          onSubmit={onSearch}
+        >
+          <input
+            type="text"
+            placeholder="Search.."
+            autoComplete="off"
+            name="books"
+          />
           <button type="submit">Submit</button>
         </form>
       </div>

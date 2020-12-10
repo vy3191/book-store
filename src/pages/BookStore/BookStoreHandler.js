@@ -5,14 +5,21 @@ import BookStoreContainer from './BookStoreContainer'
 const BookStoreHandler = () => {
   const [data, setData] = useState([])
   const [error, setError] = useState(false)
+ 
+  const handleSearch = (event) => {
+    event.preventDefault();
+  
+    const form = new FormData(event.target);
+    let searchValue = form.get('books');
+    searchValue = searchValue.replace(' ', '+');
 
-  useEffect(() => {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=harry+potter`
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}`;
+  
     fetch(url)
       .then((response) => response.json())
       .then((data) => setData(dataMapper(data)))
       .catch(() => setError(true))
-  }, [])
+  }
 
   const dataMapper = (data) =>
     data &&
@@ -25,7 +32,7 @@ const BookStoreHandler = () => {
 
   return (
     <>
-      <BookStoreContainer error={error} data={data} />
+      <BookStoreContainer onSearch={handleSearch} error={error} data={data} />
     </>
   )
 }
