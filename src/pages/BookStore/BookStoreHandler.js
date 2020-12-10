@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import BookStoreContainer from './BookStoreContainer';
 
-const BookStoreHandler = ({data}) => {
+const BookStoreHandler = () => {
   return (
-    <BookStoreContainer data={data} />
+    <BookStoreContainer  />
   )
 }
 

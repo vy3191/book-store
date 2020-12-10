@@ -1,7 +1,15 @@
-const BookStoreContainer = ({data}) => {
+import { Card } from 'components';
+
+const BookStoreContainer = () => {
   return (
-    <div>
-      {data}
+    <div className="book-store">
+      <Card />
+      <Card />
+      <Card />     
+      <Card />     
+      <Card />     
+      <Card />     
+      <Card />     
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
-import DashBoardHandler from './BookStore/BookStoreHandler';
+import BookStoreHandler from './BookStore/BookStoreHandler';
 import { Header, Footer } from 'components';
 
 const BaseApp = () => {
@@ -12,7 +12,7 @@ const BaseApp = () => {
             <Redirect to="/home" />
           </Route>
           <Route path="/home" render={ () => <h1>Home goes here</h1> } />
-          <Route path="/book-store" render={ () => <h1>Book store goes here</h1> } />
+          <Route path="/book-store" render={ () => <BookStoreHandler /> } />
           <Route path="/contact" render={ () => <h1>Contact goes here</h1> } />
         </Switch> 
       </section>
