@@ -1,4 +1,5 @@
 import { Card } from 'components'
+import { NavLink } from 'react-router-dom';
 
 const BookStoreContainer = ({ data, onSearch }) => {
   return (
@@ -17,7 +18,9 @@ const BookStoreContainer = ({ data, onSearch }) => {
         </form>
       </div>
       {data.map((book) => (
-        <Card key={book.id} {...book} />
+        <NavLink exact to={`/book-store/${book.id}`} key={book.id} >
+          <Card {...book} />
+        </NavLink>
       ))}
     </div>
   )
