@@ -1,4 +1,5 @@
 import { createHashHistory } from 'history';
+import promise from 'redux-promise-middleware';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createRootReducer from '../reducers';
@@ -11,6 +12,7 @@ export default function configureStore(preloadedState) {
     preloadedState,
     compose(
       applyMiddleware(
+        promise,
         routerMiddleware(history)      
       )
     )

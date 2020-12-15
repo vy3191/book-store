@@ -1,51 +1,39 @@
-import { useState } from 'react'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchBooks as fetchBooksAction } from '../../redux/actions';
 import BookStoreContainer from './BookStoreContainer'
 
-const BookStoreHandler = () => {
-  const [data, setData] = useState([])
-  const [error, setError] = useState(false)
+const BookStoreHandler = ({ fetchBooks, data }) => {
  
   const handleSearch = (event) => {
-    event.preventDefault();
-  
+    event.preventDefault();  
     const form = new FormData(event.target);
     let searchValue = form.get('books');
     searchValue = searchValue.replace(' ', '+');
-
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}`;
-  
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setData(dataMapper(data)))
-      .catch(() => setError(true))
+    fetchBooks(searchValue)
   }
-
-  const dataMapper = (data) =>
-    data &&
-    data.items.map((item) => ({
-      imgSrc: item.volumeInfo.imageLinks.thumbnail,
-      imgAlt: item.volumeInfo.authors.join(', '),
-      title: item.volumeInfo.title,
-      id: item.id,
-    }))
 
   return (
     <>
-      <BookStoreContainer onSearch={handleSearch} error={error} data={data} />
+      <BookStoreContainer onSearch={handleSearch}  data={data} />
     </>
   )
 }
 
 BookStoreHandler.propTypes = {
-  data: PropTypes.string,
+  fetchBooks: PropTypes.func,
+  data: PropTypes.array
 }
 
 const mapStateToProps = (state) => {
-  const { testData } = state
+  const { bookStore: { data } } = state
   return {
-    data: testData,
+    data
   }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchBooks: fetchBooksAction }, dispatch);
 }
 
-export default connect(mapStateToProps)(BookStoreHandler)
+export default connect(mapStateToProps, mapDispatchToProps)(BookStoreHandler)

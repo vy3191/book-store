@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
+import { bookStoreReducer } from './bookStore'
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
-  testData: 'test-data'
+  bookStore: bookStoreReducer
 });
 
 export default createRootReducer;
