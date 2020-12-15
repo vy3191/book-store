@@ -1,23 +1,15 @@
-import { FETCH_BOOKS } from '../actions';
+import { FETCH_BOOKS, GET_VOLUME } from '../actions';
 
 const initialState = {
    fetching:false,
    data: [],
+   volume: {},
    error: null
 }
 
 import { listBooks } from './model/model';
 
-export const bookStoreReducer = (state=initialState, action) => {
-  // action.type === `${FETCH_BOOKS}_FULLFILLED` && (
-  //   state =  {
-  //     ...state,
-  //     fetching: false,
-  //     error: null,
-  //     data: action.payload
-  //   }
-  // )
-  console.log('action>>>>>>>>>>>', action)
+export const bookStoreReducer = (state=initialState, action) => { 
   switch(action.type) {
     case `${FETCH_BOOKS}_PENDING`:
       return {
@@ -40,6 +32,28 @@ export const bookStoreReducer = (state=initialState, action) => {
         error: true,
         data: []
       } 
+      case `${GET_VOLUME}_PENDING`:
+        return {
+          ...state,
+          fetching: true,
+          error: null,
+          data: []
+        }
+      case `${GET_VOLUME}_FULFILLED`:
+        return {
+          ...state,
+          fetching: false,
+          error: null,
+          volume: action.payload
+        }
+      case `${GET_VOLUME}_REJECTED`:
+        return {
+          ...state,
+          fetching: false,
+          error: true,
+          volume: {}
+        }  
+
     default:
       return state
            
